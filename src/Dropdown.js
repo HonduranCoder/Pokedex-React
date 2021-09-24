@@ -6,12 +6,13 @@ export default class Dropdown extends Component {
     render() {
         return ( 
             <>
-            {/* options map  */}
-            <select onChange={this.props.handleDropdown}> 
-              <option value ="">{this.props.optionValue}</option>
+            <select onChange={this.props.handleSort}> 
              {
                  this.props.options.map(entry=> <option key= {entry} value ={entry}>{entry}</option>)
-             })
-              </select>        
-          </>
-          )
+             }
+             </select>        
+          </> 
+        )
+            }
+        }
+        

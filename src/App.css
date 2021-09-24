@@ -36,3 +36,31 @@
     transform: rotate(360deg);
   }
 }
+
+img{
+  width:100px;
+  border:3px solid turquoise;
+  list-style: none;
+  list-style-type: none;
+}
+
+.form{
+  border:6px solid turquoise;
+  display: flex;
+  justify-content:center;
+  align-items: center;
+}
+
+.dropdown{
+  border:2px solid turquoise;
+}
+
+.button{
+  background-color: black;
+  color:turquoise;
+}
+
+body{
+  background-color: black;
+  color: turquoise;
+}

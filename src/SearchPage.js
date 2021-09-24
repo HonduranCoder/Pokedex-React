@@ -16,6 +16,7 @@ export default class SearchPage extends Component {
         sortOrder: '',
         query: '',
         pokemon:[],
+        isLoading:false,
         }
     // 1). We need to declare a componentDidMpount to happen on load of the component. 
     // 2). We must label this function as async. 
@@ -28,8 +29,9 @@ export default class SearchPage extends Component {
        await this.fetchSearch();
     }
 
-    handleSort = (e) => {
+    handleSort = async(e) => {
         this.setState({ sortOrder: e.target.value})
+        await this.fetchSearch()
       }
       
     handleQuery = async (e) => {
@@ -42,7 +44,7 @@ export default class SearchPage extends Component {
       // 4). The result of awaiting request.get with our url. 
       try{
           this.setState({ isLoading: true})
-          const response = await request.get(`https://pokedex-alchemy.herokuapp.com/api/pokedex?pokemon=${this.state.query}`);
+          const response = await request.get(`https://pokedex-alchemy.herokuapp.com/api/pokedex?pokemon=${this.state.query}&sort=pokemon&direction=${this.state.sortOrder}`);
       // 5). if we did this right, we get API data here 
       
       //?
@@ -59,7 +61,13 @@ export default class SearchPage extends Component {
     render() {
         return (
             <>
-               <Search onChange={this.props.handleDropdown}/>
+            {/* here we are referring to the props in Search.js, but this is tha parent file so do not need this.props. this.props is used for */}
+               <Search  handleSubmit= {this.handleSubmit}
+                        handleQuery={this.handleQuery}
+                        handleSort={this.handleSort}
+                        query = {this.state.query}
+                        sortOrder = {this.state.sortOrder}
+               />
                 <ul>
                     {
                         this.state.isLoading
