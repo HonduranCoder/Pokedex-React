@@ -1,8 +1,5 @@
 import React, { Component } from 'react'
 import Search from './Search.js'
-import Dropdown from './Dropdown.js'
-//import PokeList from './PokeList.js'
-//import PokeItem from './PokeItem.js'
 import request from 'superagent'
 import PokeList from './PokeList.js';
 import Loader from 'react-loader-spinner';
@@ -17,6 +14,7 @@ export default class SearchPage extends Component {
         query: '',
         pokemon:[],
         isLoading:false,
+        currentPage: 1,
         }
     // 1). We need to declare a componentDidMpount to happen on load of the component. 
     // 2). We must label this function as async. 
@@ -39,12 +37,22 @@ export default class SearchPage extends Component {
        await this.fetchSearch();
     }
 
+    handlePrevClick = async() => {
+        await this.setState({currentPage: this.state.currentPage - 1})
+        this.fetchSearch()
+    }
+
+    handleNextClick= async() => {
+        await this.setState({currentPage: this.state.currentPage + 1})
+        this.fetchSearch()
+    }
+
   fetchSearch = async () => {
       // 3). We declare the repsonse 
       // 4). The result of awaiting request.get with our url. 
       try{
           this.setState({ isLoading: true})
-          const response = await request.get(`https://pokedex-alchemy.herokuapp.com/api/pokedex?pokemon=${this.state.query}&sort=pokemon&direction=${this.state.sortOrder}`);
+          const response = await request.get(`https://pokedex-alchemy.herokuapp.com/api/pokedex?pokemon=${this.state.query}&sort=pokemon&direction=${this.state.sortOrder&this.state.currentPage}`);
       // 5). if we did this right, we get API data here 
       
       //?
@@ -68,6 +76,9 @@ export default class SearchPage extends Component {
                         query = {this.state.query}
                         sortOrder = {this.state.sortOrder}
                />
+              {/* {this.state.currentPage !== 1 && <button onClick={this.handlePrevClick}>Previous</button>}
+              <span> Current Page: {this.state.currentPage}</span>
+        {this.state.PokeList.length < 5 || <button onClick={this.handleNextClick}>Next</button>} */}
                 <ul>
                     {
                         this.state.isLoading
