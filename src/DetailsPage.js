@@ -18,8 +18,18 @@ export default class DetailsPage extends Component {
         console.log(this.state.pokemon)
         return (
             <>
+            <Router>
+                <header>
+                    <NavLink to ="/">Home</NavLink>
+                </header>
             <div>
                 <p>Welcome to detail page for {this.state.pokemon.pokemon}</p>
+                <p>Ability 1: {this.state.pokemon.ability_1}</p>
+                <p>Hidden Ability: {this.state.pokemon.ability_hidden}</p>
+                <p>Egg Group 1: {this.state.pokemon.egg_group_1}</p>
+                <p>Egg Group 2: {this.state.pokemon.egg_group_2}</p>
+                <p>Evolves from: {this.state.pokemon.evolves_from_species_id}</p>
+                <p>Generation ID: {this.state.pokemon.generation_id}</p>
             </div>
              <ul>
              {

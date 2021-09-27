@@ -63,11 +63,24 @@ img{
 body{
   background-color: black;
   color: turquoise;
+  margin-left: 40px;
 }
+
+.quote{
+  font-style: italic;
+}
+
 
 a{
   text-decoration: none;
   list-style: none;
   list-style-type: none;
   color:turquoise;
+}
+
+.pic, h2{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 30px;
 }
