@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import request from 'superagent'
 import Loader from 'react-loader-spinner';
 import PokeDetails from './PokeDetails.js';
+import { NavLink } from 'react-router-dom'
 
 
 export default class DetailsPage extends Component {
@@ -18,10 +19,17 @@ export default class DetailsPage extends Component {
         console.log(this.state.pokemon)
         return (
             <>
-            <Router>
-                <header>
-                    <NavLink to ="/">Home</NavLink>
-                </header>
+            <header>
+                <NavLink
+                to="/"
+                activeStyle={{
+                fontWeight: "bold",
+                color: "turquoise"
+            }}
+            >
+            Home
+                </NavLink>
+              </header>
             <div>
                 <p>Welcome to detail page for {this.state.pokemon.pokemon}</p>
                 <p>Ability 1: {this.state.pokemon.ability_1}</p>

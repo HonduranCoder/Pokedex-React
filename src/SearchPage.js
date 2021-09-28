@@ -3,6 +3,7 @@ import Search from './Search.js'
 import request from 'superagent'
 import PokeList from './PokeList.js';
 import Loader from 'react-loader-spinner';
+import { NavLink } from 'react-router-dom';
 
 //fetches and renders unfiltered pokemon on load. Use componenetDidMount with componenests PokeList(takes in a list of Pokemon as a prop) and PokeItem(takes in a single pokemon as a prop).
 
@@ -76,6 +77,16 @@ export default class SearchPage extends Component {
                         query = {this.state.query}
                         sortOrder = {this.state.sortOrder}
                />
+               <NavLink
+                to="/"
+                activeStyle={{
+                fontWeight: "bold",
+                color: "turquoise", 
+            }}
+            >
+            Go Home
+                </NavLink>
+               
               {/* {this.state.currentPage !== 1 && <button onClick={this.handlePrevClick}>Previous</button>}
               <span> Current Page: {this.state.currentPage}</span>
         {this.state.PokeList.length < 5 || <button onClick={this.handleNextClick}>Next</button>} */}
