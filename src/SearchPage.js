@@ -6,7 +6,7 @@ import Loader from 'react-loader-spinner';
 import { NavLink } from 'react-router-dom';
 
 //fetches and renders unfiltered pokemon on load. Use componenetDidMount with componenests PokeList(takes in a list of Pokemon as a prop) and PokeItem(takes in a single pokemon as a prop).
-
+let numberOfPages; 
 //Maintain State
 export default class SearchPage extends Component {
     //State is a place we can put something that needs to be shared in lots of different places in the same component. 
@@ -55,7 +55,7 @@ export default class SearchPage extends Component {
           this.setState({ isLoading: true})
           const response = await request.get(`https://pokedex-alchemy.herokuapp.com/api/pokedex?pokemon=${this.state.query}&sort=pokemon&direction=${this.state.sortOrder&this.state.currentPage}`);
       // 5). if we did this right, we get API data here 
-      
+      numberOfPages=response.body.count / response.body.perPage
       //?
       this.setState({
           pokemon: response.body.results, 
@@ -87,9 +87,9 @@ export default class SearchPage extends Component {
             Go Home
                 </NavLink>
                
-              {/* {this.state.currentPage !== 1 && <button onClick={this.handlePrevClick}>Previous</button>}
+              {this.state.currentPage !== 1 && <button onClick={this.handlePrevClick}>Previous</button>}
               <span> Current Page: {this.state.currentPage}</span>
-        {this.state.PokeList.length < 5 || <button onClick={this.handleNextClick}>Next</button>} */}
+            {this.state.currentPage < numberOfPages && <button onClick={this.handleNextClick}>Next</button>} 
                 <ul>
                     {
                         this.state.isLoading
